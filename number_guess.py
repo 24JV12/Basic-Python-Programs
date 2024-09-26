@@ -1,47 +1,30 @@
-from random import choice
+from random import randint
 
-guesses = 1
-
-possible_numbers = []
-
-inital = int(input("Initial: "))
+initial = int(input("Initial: "))
 final = int(input("Final: "))
 
-for possible_number in range(inital, final+1):
-    possible_numbers.append(possible_number)
-number = choice(possible_numbers)
-
+number = randint(initial, final)
 
 while True:
-    total_guesses = int(input("How many chances? [1, 25] "))
-    if total_guesses >= 25 or total_guesses <= 1:
-        print("Error Detected!")
+    total_guesses = int(input("How many chances? [1, 25]: "))
+    if 1 < total_guesses < 25:
+        break
+    print("Error Detected!")
+
+for guesses in range(1, total_guesses + 1):
+    guess = int(input(f"Guess {guesses}: "))
+    
+    if guess == 0:
+        if input("Reveal Answer? [Y/n]: ").lower() in ["y", "yes"]:
+            print(f"Number: {number}")
         continue
-    else:
+    elif guess == number:
+        print("You Won!")
         break
+    elif guess > number:
+        print("Try something less than that")
+    else:
+        print("Try with something more than that")
 
-while True:
-    cmd = int(input(f"Guess {guesses}: "))
-    if guesses != total_guesses:
-        if cmd == 0:
-            confirm = input("Reveal Answer? [Y/n] ").lower()
-            if confirm == "y" or confirm == "yes":
-                print(f"Number: {number}")
-            elif confirm == "n" or confirm == "no":
-                continue
-        elif cmd != number:
-            if cmd > number:
-                print("Try something less than that")
-            else:
-                print("Try with something more than that")
-            guesses+=1
-            continue
-        elif cmd == number:
-            print("You Won!")
-            break
-        else:
-            print("Error Detected!")
-            continue
-    else:
-        print("You Lost!")
-        break
+else:
+    print("You Lost!")
