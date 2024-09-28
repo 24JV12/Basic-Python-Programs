@@ -1,7 +1,6 @@
 from random import randint
 
-initial = int(input("Initial: "))
-final = int(input("Final: "))
+initial, final = int(input("Initial: ")), int(input("Final: "))
 
 number = randint(initial, final)
 
