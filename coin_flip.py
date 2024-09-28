@@ -2,7 +2,7 @@ from random import choice
 import os
 
 def clear():
-    os.system('cls')
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def pick_one():
     jar = []
@@ -18,9 +18,13 @@ def pick_one():
             exit()
         else: 
             jar.append(cmd)
-            interval+=1
+            interval += 1
             continue
-    print(f"Random Pick is '{choice(jar)}'")
+
+    if jar:
+        print(f"Random Pick is '{choice(jar)}'")
+    else:
+        print("No choices were entered.")
 
 clear()
 
