@@ -1,8 +1,6 @@
 from random import randint
 
-initial, final = int(input("Initial: ")), int(input("Final: "))
-
-number = randint(initial, final)
+number = randint(int(input("Initial: ")), int(input("Final: ")))
 
 while True:
     total_guesses = int(input("How many chances? [1, 25]: "))
